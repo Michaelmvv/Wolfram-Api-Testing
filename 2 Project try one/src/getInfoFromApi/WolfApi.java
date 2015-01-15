@@ -20,6 +20,7 @@ public class WolfApi {
 
 	public WolfApi(String EnginFormat) {
 		this.EnginFormat = EnginFormat;
+		startEngine();
 
 	}
 

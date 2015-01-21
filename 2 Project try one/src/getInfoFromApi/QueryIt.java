@@ -1,6 +1,9 @@
 package getInfoFromApi;
 
+import com.wolfram.alpha.WAPlainText;
+import com.wolfram.alpha.WAPod;
 import com.wolfram.alpha.WAQueryResult;
+import com.wolfram.alpha.WASubpod;
 
 public class QueryIt {
 	public static WAQueryResult query(String quary, String type) {
@@ -9,4 +12,27 @@ public class QueryIt {
 
 	}
 
+	public static String qs(String query, String type) {
+		WolfApi api = new WolfApi(type);
+		StringBuilder builder = new StringBuilder();
+
+		WAQueryResult result = api.quary(query);
+		for (WAPod pod : result.getPods()) {
+			if (!pod.isError()) {
+				builder.append(pod.getTitle());
+				builder.append("------------");
+				for (WASubpod subpod : pod.getSubpods()) {
+					for (Object element : subpod.getContents()) {
+						if (element instanceof WAPlainText) {
+							builder.append(((WAPlainText) element).getText());
+						}
+					}
+				}
+				System.out.println("");
+			}
+		}
+		String s = builder.toString();
+		return s;
+
+	}
 }

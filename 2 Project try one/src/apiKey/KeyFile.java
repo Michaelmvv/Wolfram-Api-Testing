@@ -16,12 +16,12 @@ public class KeyFile {
 	String API_KEY_STORAGE_FILE_NAME = "api.txt";
 	String API_KEY_STORAGE_FILE = API_KEY_STORAGE_PATH
 			+ API_KEY_STORAGE_FILE_NAME;
-	String EMPTY_FILE_CONTENT = "put api key here";
+	String EMPTY_FILE_CONTENT = "";
 
 	File path = new File(API_KEY_STORAGE_PATH);
 	File file = new File(API_KEY_STORAGE_FILE);
 
-	public void saveAPIKey() {
+	public void saveAPIKey() throws FileNotFoundException {
 		check();
 		try {
 			PrintWriter writer = new PrintWriter(new File(API_KEY_STORAGE_FILE));
@@ -38,14 +38,16 @@ public class KeyFile {
 		String key = reader.readLine();
 		reader.close();
 
-		if (key.equals(EMPTY_FILE_CONTENT)) {
+		if (key.equals(EMPTY_FILE_CONTENT) || key.isEmpty() || key == null) {
 			saveAPIKey();
 			BufferedReader reader2 = new BufferedReader(new FileReader(file));
 
 			key = reader2.readLine();
 			reader2.close();
 		}
+
 		API_KEY = key;
+
 		return API_KEY;
 	}
 
@@ -71,6 +73,14 @@ public class KeyFile {
 	private void resetApiFile(File file) throws FileNotFoundException {
 		PrintWriter writer = new PrintWriter(file);
 		writer.write(EMPTY_FILE_CONTENT);
+		writer.flush();
+		writer.close();
+	}
+
+	public void ResetAPI() throws FileNotFoundException {
+		check();
+		PrintWriter writer = new PrintWriter(file);
+		writer.write(JOptionPane.showInputDialog("Paste your new api key"));
 		writer.flush();
 		writer.close();
 	}

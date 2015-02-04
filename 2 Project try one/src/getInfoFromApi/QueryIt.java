@@ -19,12 +19,12 @@ public class QueryIt {
 		WAQueryResult result = api.quary(query);
 		for (WAPod pod : result.getPods()) {
 			if (!pod.isError()) {
-				builder.append(pod.getTitle());
-				builder.append("------------");
+				builder.append(pod.getTitle()+"\n");
+				builder.append("------------"+"\n");
 				for (WASubpod subpod : pod.getSubpods()) {
 					for (Object element : subpod.getContents()) {
 						if (element instanceof WAPlainText) {
-							builder.append(((WAPlainText) element).getText());
+							builder.append(((WAPlainText) element).getText()+"\n");
 						}
 					}
 				}

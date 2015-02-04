@@ -1,6 +1,7 @@
 package getInfoFromApi;
 
-import javax.swing.JOptionPane;
+import java.io.FileNotFoundException;
+
 
 import starter.Start;
 import apiKey.KeyFile;
@@ -31,9 +32,11 @@ public class WolfApi {
 			appid = key.getApiKey();
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,
-					"Could not get api key! Stoping");
-			System.exit(0);
+			try {
+				key.ResetAPI();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 		engine.setAppID(appid);
 		engine.addFormat(EnginFormat);

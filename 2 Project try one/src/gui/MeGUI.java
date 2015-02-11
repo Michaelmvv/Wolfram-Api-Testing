@@ -2,7 +2,9 @@ package gui;
 
 import getInfoFromApi.QueryIt;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,7 +12,9 @@ import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -28,6 +32,15 @@ public class MeGUI implements ActionListener, KeyListener {
 	JTabbedPane tabbedPane = new JTabbedPane();
 	JPanel settingsPanel = new JPanel();
 	JButton newApiKey = new JButton("New Api Key");
+
+	Color background;
+
+	// color choosing obj.
+	JFrame colorFrame = new JFrame("Color Choser");
+	JColorChooser cc = new JColorChooser();
+	JButton goToColorFrame = new JButton("Open color choser");
+	JPanel colorPanel = new JPanel();
+	JButton CDone = new JButton("Done");
 
 	public void makeGui() {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -47,11 +60,28 @@ public class MeGUI implements ActionListener, KeyListener {
 		tabbedPane.setTitleAt(1, "Output");
 		tabbedPane.setTitleAt(2, "Settings");
 
+		settingsPanel.setLayout(new GridLayout(4, 1, 10, 10));
+		JLabel apikey = new JLabel("Api Key:");
+		apikey.setPreferredSize(new Dimension(100, 10));
+		settingsPanel.add(apikey);
+		newApiKey.setPreferredSize(new Dimension(100, 50));
 		settingsPanel.add(newApiKey);
+		settingsPanel.add(new JLabel("Background color:"));
+		settingsPanel.add(goToColorFrame);
+
 		panel.add(quaryField);
 		panel.add(SerchButton);
 		SerchButton.addActionListener(this);
 		newApiKey.addActionListener(this);
+
+		// color chozer
+		goToColorFrame.addActionListener(this);
+		CDone.addActionListener(this);
+		colorFrame.add(colorPanel);
+		colorPanel.add(cc);
+		colorPanel.add(CDone);
+
+		colorFrame.pack();
 
 		quaryField.addKeyListener(this);
 		frame.setVisible(true);
@@ -68,12 +98,30 @@ public class MeGUI implements ActionListener, KeyListener {
 			frame.pack();
 		}
 		if (buttonPressed == newApiKey) {
-			System.out.println("HI");
 			try {
 				new KeyFile().ResetAPI();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+		}
+		if (buttonPressed == goToColorFrame) {
+			colorFrame.setVisible(true);
+		}
+		if (buttonPressed == CDone) {
+			colorFrame.setVisible(false);
+			background = cc.getColor();
+			frame.setBackground(background);
+			panel.setBackground(background);
+			quaryField.setBackground(background);
+			SerchButton.setBackground(background);
+			SerchButton.setBorderPainted(false);
+			text.setBackground(background);
+			tabbedPane.setBackground(background);
+			settingsPanel.setBackground(background);
+			newApiKey.setBackground(background);
+			goToColorFrame.setBackground(background);
+			frame.pack();
+
 		}
 
 	}
@@ -81,7 +129,8 @@ public class MeGUI implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 
-		if (arg0.getKeyCode() == KeyEvent.VK_ENTER||arg0.getKeyCode() == KeyEvent.VK_TAB) {
+		if (arg0.getKeyCode() == KeyEvent.VK_ENTER
+				|| arg0.getKeyCode() == KeyEvent.VK_TAB) {
 			tabbedPane.setSelectedIndex(1);
 			text.setText(QueryIt.qs(quaryField.getText(), "plaintext"));
 			frame.pack();

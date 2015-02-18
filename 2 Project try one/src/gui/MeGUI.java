@@ -1,6 +1,5 @@
 package gui;
 
-import getInfoFromApi.QueryIt;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.WindowConstants;
 
+import saveing.Save;
+
 import apiKey.KeyFile;
 
 public class MeGUI implements ActionListener, KeyListener {
@@ -34,6 +35,7 @@ public class MeGUI implements ActionListener, KeyListener {
 	JButton newApiKey = new JButton("New Api Key");
 
 	Color background;
+	Color buttonColor;
 
 	// color choosing obj.
 	JFrame colorFrame = new JFrame("Color Choser");
@@ -94,7 +96,11 @@ public class MeGUI implements ActionListener, KeyListener {
 
 		if (buttonPressed == SerchButton) {
 			tabbedPane.setSelectedIndex(1);
-			text.setText(QueryIt.qs(quaryField.getText(), "plaintext"));
+			try {
+				text.setText(new Save().Search(quaryField.getText()));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			frame.pack();
 		}
 		if (buttonPressed == newApiKey) {
@@ -108,13 +114,14 @@ public class MeGUI implements ActionListener, KeyListener {
 			colorFrame.setVisible(true);
 		}
 		if (buttonPressed == CDone) {
+
 			colorFrame.setVisible(false);
 			background = cc.getColor();
+
 			frame.setBackground(background);
 			panel.setBackground(background);
 			quaryField.setBackground(background);
 			SerchButton.setBackground(background);
-			SerchButton.setBorderPainted(false);
 			text.setBackground(background);
 			tabbedPane.setBackground(background);
 			settingsPanel.setBackground(background);
@@ -132,7 +139,11 @@ public class MeGUI implements ActionListener, KeyListener {
 		if (arg0.getKeyCode() == KeyEvent.VK_ENTER
 				|| arg0.getKeyCode() == KeyEvent.VK_TAB) {
 			tabbedPane.setSelectedIndex(1);
-			text.setText(QueryIt.qs(quaryField.getText(), "plaintext"));
+			try {
+				text.setText(new Save().Search(quaryField.getText()));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			frame.pack();
 
 		}

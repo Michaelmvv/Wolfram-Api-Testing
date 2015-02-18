@@ -1,5 +1,7 @@
 package starter;
 
+import javax.swing.UIManager;
+
 import gui.MeGUI;
 
 public class Start {
@@ -11,6 +13,13 @@ public class Start {
 					"com.apple.mrj.application.apple.menu.about.name",
 					"WRA Project");
 		}
+		try {
+			UIManager.setLookAndFeel(UIManager
+					.getCrossPlatformLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		new MeGUI().makeGui();
 	}
 }

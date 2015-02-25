@@ -13,7 +13,14 @@ public class Save {
 	String saveFolder = "WolframApi/save/";
 
 	public String Search(String input) throws FileNotFoundException {
-		File file = new File(saveFolder + input + ".txt");
+
+		String FixedInput = input;
+
+		FixedInput = FixedInput.replace("/", "-Slash-");
+		FixedInput = FixedInput.replace("|", "-LineDown-");
+		FixedInput = FixedInput.replace("\\", "-BackSlash-");
+
+		File file = new File(saveFolder + FixedInput + ".txt");
 		File folder = new File(saveFolder);
 		if (!folder.exists()) {
 			folder.mkdirs();

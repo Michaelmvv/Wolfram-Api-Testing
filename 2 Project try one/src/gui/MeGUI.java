@@ -21,7 +21,6 @@ import javax.swing.JTextPane;
 import javax.swing.WindowConstants;
 
 import saveing.Save;
-
 import apiKey.KeyFile;
 
 public class MeGUI implements ActionListener, KeyListener {
@@ -96,7 +95,7 @@ public class MeGUI implements ActionListener, KeyListener {
 
 		if (buttonPressed == SerchButton) {
 			tabbedPane.setSelectedIndex(1);
-			try {
+			try { 
 				text.setText(new Save().Search(quaryField.getText()));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();

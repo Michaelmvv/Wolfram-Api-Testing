@@ -8,9 +8,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
+
 public class Save {
 
-	String saveFolder = "WolframApi/save/";
+	String saveFolder = "/WolframApi/save/";
+	
+	public void DelFiles(){
+		System.out.println("Clearing files");
+		
+			File file = new File(saveFolder);
+			file.deleteOnExit();
+			System.exit(0);
+			
+	}
 
 	public String Search(String input) throws FileNotFoundException {
 

@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -36,6 +35,8 @@ public class MeGUI implements ActionListener, KeyListener {
 	Color background;
 	Color buttonColor;
 
+	JButton delfiles = new JButton("Clear Files");
+
 	// color choosing obj.
 	JFrame colorFrame = new JFrame("Color Choser");
 	JColorChooser cc = new JColorChooser();
@@ -61,7 +62,7 @@ public class MeGUI implements ActionListener, KeyListener {
 		tabbedPane.setTitleAt(1, "Output");
 		tabbedPane.setTitleAt(2, "Settings");
 
-		settingsPanel.setLayout(new GridLayout(4, 1, 10, 10));
+		settingsPanel.setLayout(new GridLayout(5, 1, 10, 10));
 		JLabel apikey = new JLabel("Api Key:");
 		apikey.setPreferredSize(new Dimension(100, 10));
 		settingsPanel.add(apikey);
@@ -69,6 +70,8 @@ public class MeGUI implements ActionListener, KeyListener {
 		settingsPanel.add(newApiKey);
 		settingsPanel.add(new JLabel("Background color:"));
 		settingsPanel.add(goToColorFrame);
+		settingsPanel.add(delfiles);
+		delfiles.addActionListener(this);
 
 		panel.add(quaryField);
 		panel.add(SerchButton);
@@ -91,43 +94,48 @@ public class MeGUI implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		JButton buttonPressed = (JButton) arg0.getSource();
-
-		if (buttonPressed == SerchButton) {
-			tabbedPane.setSelectedIndex(1);
-			try { 
-				text.setText(new Save().Search(quaryField.getText()));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+		if (arg0.getSource() instanceof JButton) {
+			JButton buttonPressed = (JButton) arg0.getSource();
+			if (buttonPressed == SerchButton) {
+				tabbedPane.setSelectedIndex(1);
+				try {
+					text.setText(new Save().Search(quaryField.getText()));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				frame.pack();
 			}
-			frame.pack();
-		}
-		if (buttonPressed == newApiKey) {
-			try {
-				new KeyFile().ResetAPI();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+			if (buttonPressed == newApiKey) {
+				try {
+					new KeyFile().ResetAPI();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
 			}
-		}
-		if (buttonPressed == goToColorFrame) {
-			colorFrame.setVisible(true);
-		}
-		if (buttonPressed == CDone) {
+			if (buttonPressed == goToColorFrame) {
+				colorFrame.setVisible(true);
+			}
+			if (buttonPressed == CDone) {
 
-			colorFrame.setVisible(false);
-			background = cc.getColor();
+				colorFrame.setVisible(false);
+				background = cc.getColor();
 
-			frame.setBackground(background);
-			panel.setBackground(background);
-			quaryField.setBackground(background);
-			SerchButton.setBackground(background);
-			text.setBackground(background);
-			tabbedPane.setBackground(background);
-			settingsPanel.setBackground(background);
-			newApiKey.setBackground(background);
-			goToColorFrame.setBackground(background);
-			frame.pack();
+				frame.setBackground(background);
+				panel.setBackground(background);
+				quaryField.setBackground(background);
+				SerchButton.setBackground(background);
+				text.setBackground(background);
+				tabbedPane.setBackground(background);
+				settingsPanel.setBackground(background);
+				newApiKey.setBackground(background);
+				goToColorFrame.setBackground(background);
+				frame.pack();
 
+			}
+			if (buttonPressed == delfiles) {
+				new Save().DelFiles();
+				
+			}
 		}
 
 	}

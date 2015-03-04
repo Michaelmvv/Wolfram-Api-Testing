@@ -40,10 +40,14 @@ public class Save {
 
 			return builder.toString().replace("null", "\n");
 		} catch (Exception e) {
-			PrintWriter writer = new PrintWriter(file);
 			String s = QueryIt.qs(input, "plaintext");
-			writer.append(s);
-			writer.close();
+			if (!s.equalsIgnoreCase("error") || !s.isEmpty() || s != null) {
+
+				PrintWriter writer = new PrintWriter(file);
+				writer.append(s);
+				writer.close();
+			}
+
 			return s;
 		}
 	}

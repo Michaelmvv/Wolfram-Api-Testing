@@ -17,6 +17,9 @@ public class QueryIt {
 		StringBuilder builder = new StringBuilder();
 
 		WAQueryResult result = api.quary(query);
+		if (result.isError()) {
+			return "error: " + result.getErrorMessage();
+		}else{
 		for (WAPod pod : result.getPods()) {
 			if (!pod.isError()) {
 				builder.append(pod.getTitle()+"\n");
@@ -34,5 +37,5 @@ public class QueryIt {
 		String s = builder.toString();
 		return s;
 
-	}
+	}}
 }

@@ -4,25 +4,27 @@ import getInfoFromApi.QueryIt;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
-
 
 public class Save {
 
-	String saveFolder = "/WolframApi/save/";
-	
-	public void DelFiles(){
+	String saveFolder = "WolframApi/save/";
+
+	public void DelFiles() {
 		System.out.println("Clearing files");
-		
-			File file = new File(saveFolder);
-			file.deleteOnExit();
-			System.exit(0);
-			
+
+		File file = new File(saveFolder);
+		try {
+			Runtime.getRuntime().exec("rm " + file.getAbsolutePath());
+		} catch (IOException e) {
+			System.out.println("Stuff Happend");
+			e.printStackTrace();
+		}
 	}
 
-	public String Search(String input) throws FileNotFoundException {
+	public String Search(String input) throws IOException {
 
 		String FixedInput = input;
 
@@ -51,8 +53,11 @@ public class Save {
 			return builder.toString().replace("null", "\n");
 		} catch (Exception e) {
 			String s = QueryIt.qs(input, "plaintext");
-			if (!s.equalsIgnoreCase("error") || !s.isEmpty() || s != null) {
-
+			if (!s.startsWith("error")) {
+				if (!folder.exists()) {
+					folder.mkdirs();
+				}
+				System.out.println(file.getPath());
 				PrintWriter writer = new PrintWriter(file);
 				writer.append(s);
 				writer.close();

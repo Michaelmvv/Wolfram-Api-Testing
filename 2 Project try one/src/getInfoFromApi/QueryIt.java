@@ -31,7 +31,7 @@ public class QueryIt {
 						}
 					}
 				}
-				System.out.println("");
+				
 			}
 		}
 		String s = builder.toString();

@@ -100,7 +100,7 @@ public class MeGUI implements ActionListener, KeyListener {
 				tabbedPane.setSelectedIndex(1);
 				try {
 					text.setText(new Save().Search(quaryField.getText()));
-				} catch (FileNotFoundException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				frame.pack();
@@ -148,7 +148,7 @@ public class MeGUI implements ActionListener, KeyListener {
 			tabbedPane.setSelectedIndex(1);
 			try {
 				text.setText(new Save().Search(quaryField.getText()));
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			frame.pack();

@@ -23,7 +23,7 @@ public class QueryIt {
 		for (WAPod pod : result.getPods()) {
 			if (!pod.isError()) {
 				builder.append(pod.getTitle()+"\n");
-				builder.append("------------"+"\n");
+				builder.append("------------------------------------"+"\n");
 				for (WASubpod subpod : pod.getSubpods()) {
 					for (Object element : subpod.getContents()) {
 						if (element instanceof WAPlainText) {

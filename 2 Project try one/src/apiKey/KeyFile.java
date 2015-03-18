@@ -25,7 +25,8 @@ public class KeyFile {
 		check();
 		try {
 			PrintWriter writer = new PrintWriter(new File(API_KEY_STORAGE_FILE));
-			writer.write(JOptionPane.showInputDialog("Paste API key here"));
+			API_KEY = JOptionPane.showInputDialog("Paste API key here");
+			writer.write(API_KEY);
 			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,15 +41,9 @@ public class KeyFile {
 
 		if (key.equals(EMPTY_FILE_CONTENT) || key.isEmpty() || key == null) {
 			saveAPIKey();
-			BufferedReader reader2 = new BufferedReader(new FileReader(file));
-
-			key = reader2.readLine();
-			reader2.close();
+			key = API_KEY;
 		}
-
-		API_KEY = key;
-
-		return API_KEY;
+		return key;
 	}
 
 	public void check() {

@@ -14,6 +14,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -28,6 +29,8 @@ public class MeGUI implements ActionListener, KeyListener {
 	JTextField quaryField = new JTextField("Pi");
 	JButton SerchButton = new JButton("Go");
 	JTextPane text = new JTextPane();
+	JScrollPane ScrollText = new JScrollPane(text);
+	
 	JTabbedPane tabbedPane = new JTabbedPane();
 	JPanel settingsPanel = new JPanel();
 	JButton newApiKey = new JButton("New Api Key");
@@ -54,8 +57,10 @@ public class MeGUI implements ActionListener, KeyListener {
 
 		frame.add(tabbedPane);
 
+		ScrollText.setPreferredSize(new Dimension(1000, 800));
+		
 		tabbedPane.add(panel, 0);
-		tabbedPane.add(text, 1);
+		tabbedPane.add(ScrollText, 1);
 		tabbedPane.add(settingsPanel, 2);
 
 		tabbedPane.setTitleAt(0, "Input");
@@ -129,6 +134,7 @@ public class MeGUI implements ActionListener, KeyListener {
 				settingsPanel.setBackground(background);
 				newApiKey.setBackground(background);
 				goToColorFrame.setBackground(background);
+				delfiles.setBackground(background);
 				frame.pack();
 
 			}

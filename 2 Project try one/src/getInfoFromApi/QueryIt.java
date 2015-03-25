@@ -19,23 +19,26 @@ public class QueryIt {
 		WAQueryResult result = api.quary(query);
 		if (result.isError()) {
 			return "error: " + result.getErrorMessage();
-		}else{
-		for (WAPod pod : result.getPods()) {
-			if (!pod.isError()) {
-				builder.append(pod.getTitle()+"\n");
-				builder.append("------------------------------------"+"\n");
-				for (WASubpod subpod : pod.getSubpods()) {
-					for (Object element : subpod.getContents()) {
-						if (element instanceof WAPlainText) {
-							builder.append(((WAPlainText) element).getText()+"\n");
+		} else {
+			for (WAPod pod : result.getPods()) {
+				if (!pod.isError()) {
+					builder.append(pod.getTitle() + "\n");
+					builder.append("------------------------------------"
+							+ "\n");
+					for (WASubpod subpod : pod.getSubpods()) {
+						for (Object element : subpod.getContents()) {
+							if (element instanceof WAPlainText) {
+								builder.append(((WAPlainText) element)
+										.getText() + "\n");
+							}
 						}
 					}
-				}
-				
-			}
-		}
-		String s = builder.toString();
-		return s;
 
-	}}
+				}
+			}
+			String s = builder.toString();
+			return s;
+
+		}
+	}
 }

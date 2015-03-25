@@ -31,9 +31,9 @@ public class MeGUI implements ActionListener, KeyListener {
 	JButton SerchButton = new JButton("Go");
 	JTextPane text = new JTextPane();
 	JScrollPane ScrollText = new JScrollPane(text);
-	
+
 	JCheckBox caps = new JCheckBox("Case Sensitive");
-	
+
 	JTabbedPane tabbedPane = new JTabbedPane();
 	JPanel settingsPanel = new JPanel();
 	JButton newApiKey = new JButton("New Api Key");
@@ -62,7 +62,7 @@ public class MeGUI implements ActionListener, KeyListener {
 		frame.add(tabbedPane);
 
 		ScrollText.setPreferredSize(new Dimension(1000, 800));
-		
+
 		tabbedPane.add(panel, 0);
 		tabbedPane.add(ScrollText, 1);
 		tabbedPane.add(settingsPanel, 2);
@@ -88,7 +88,6 @@ public class MeGUI implements ActionListener, KeyListener {
 		SerchButton.addActionListener(this);
 		newApiKey.addActionListener(this);
 
-		
 		// color chozer
 		goToColorFrame.addActionListener(this);
 		CDone.addActionListener(this);
@@ -110,7 +109,8 @@ public class MeGUI implements ActionListener, KeyListener {
 			if (buttonPressed == SerchButton) {
 				tabbedPane.setSelectedIndex(1);
 				try {
-					text.setText(new Save().Search(quaryField.getText(),caps.isSelected()));
+					text.setText(new Save().Search(quaryField.getText(),
+							caps.isSelected()));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -148,7 +148,7 @@ public class MeGUI implements ActionListener, KeyListener {
 			}
 			if (buttonPressed == delfiles) {
 				new Save().DelFiles();
-				
+
 			}
 		}
 
@@ -161,7 +161,8 @@ public class MeGUI implements ActionListener, KeyListener {
 				|| arg0.getKeyCode() == KeyEvent.VK_TAB) {
 			tabbedPane.setSelectedIndex(1);
 			try {
-				text.setText(new Save().Search(quaryField.getText(),caps.isSelected()));
+				text.setText(new Save().Search(quaryField.getText(),
+						caps.isSelected()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

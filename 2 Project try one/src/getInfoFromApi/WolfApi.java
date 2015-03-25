@@ -2,7 +2,6 @@ package getInfoFromApi;
 
 import java.io.FileNotFoundException;
 
-
 import starter.Start;
 import apiKey.KeyFile;
 

@@ -25,22 +25,27 @@ public class Save {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void Elements() throws IOException {
 		for (int i = 0; i < 118; i++) {
-		Search("Element "+ i);
+			Search("Element " + i, false);
 		}
 	}
-	
 
-	public String Search(String input) throws IOException {
+	public String Search(String input, Boolean caseSenc) throws IOException {
 		if (input.equalsIgnoreCase("AllElements")) {
 			Elements();
 			return "Loading All dem Elements";
 		}
-
-		String FixedInput = String.format("%040x",
-				new BigInteger(1, input.toLowerCase().getBytes()));
+		String FixedInput;
+		if (caseSenc) {
+			FixedInput = String.format("%040x",
+					new BigInteger(1, input.getBytes()));
+		} else {
+			FixedInput = String.format("%040x", new BigInteger(1, input
+					.toLowerCase().getBytes()));
+			input = input.toLowerCase();
+		}
 
 		File file = new File(saveFolder + FixedInput);
 		File folder = new File(saveFolder);
@@ -51,10 +56,10 @@ public class Save {
 			StringBuilder builder = new StringBuilder();
 
 			BufferedReader reader = new BufferedReader(new FileReader(file));
-			LineNumberReader  lnr = new LineNumberReader(new FileReader(file));
+			LineNumberReader lnr = new LineNumberReader(new FileReader(file));
 			lnr.skip(Long.MAX_VALUE);
 			System.out.println(lnr.getLineNumber() + 1);
-			
+
 			for (int i = 0; i < lnr.getLineNumber(); i++) {
 				String s = reader.readLine();
 				builder.append(s);
@@ -71,7 +76,7 @@ public class Save {
 				if (!folder.exists()) {
 					folder.mkdirs();
 				}
-				System.out.println("Saveing to: "+file.getPath());
+				System.out.println("Saveing to: " + file.getPath());
 				PrintWriter writer = new PrintWriter(file);
 				writer.append(s);
 				writer.close();

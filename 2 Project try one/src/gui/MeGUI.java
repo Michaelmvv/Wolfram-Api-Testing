@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,6 +31,8 @@ public class MeGUI implements ActionListener, KeyListener {
 	JButton SerchButton = new JButton("Go");
 	JTextPane text = new JTextPane();
 	JScrollPane ScrollText = new JScrollPane(text);
+	
+	JCheckBox caps = new JCheckBox("Case Sensitive");
 	
 	JTabbedPane tabbedPane = new JTabbedPane();
 	JPanel settingsPanel = new JPanel();
@@ -54,6 +57,7 @@ public class MeGUI implements ActionListener, KeyListener {
 		frame.setSize(800, 300);
 
 		text.setBackground(panel.getBackground());
+		text.setEditable(false);
 
 		frame.add(tabbedPane);
 
@@ -80,9 +84,11 @@ public class MeGUI implements ActionListener, KeyListener {
 
 		panel.add(quaryField);
 		panel.add(SerchButton);
+		panel.add(caps);
 		SerchButton.addActionListener(this);
 		newApiKey.addActionListener(this);
 
+		
 		// color chozer
 		goToColorFrame.addActionListener(this);
 		CDone.addActionListener(this);
@@ -104,7 +110,7 @@ public class MeGUI implements ActionListener, KeyListener {
 			if (buttonPressed == SerchButton) {
 				tabbedPane.setSelectedIndex(1);
 				try {
-					text.setText(new Save().Search(quaryField.getText()));
+					text.setText(new Save().Search(quaryField.getText(),caps.isSelected()));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -135,6 +141,8 @@ public class MeGUI implements ActionListener, KeyListener {
 				newApiKey.setBackground(background);
 				goToColorFrame.setBackground(background);
 				delfiles.setBackground(background);
+				caps.setBackground(background);
+				ScrollText.setBackground(background);
 				frame.pack();
 
 			}
@@ -153,7 +161,7 @@ public class MeGUI implements ActionListener, KeyListener {
 				|| arg0.getKeyCode() == KeyEvent.VK_TAB) {
 			tabbedPane.setSelectedIndex(1);
 			try {
-				text.setText(new Save().Search(quaryField.getText()));
+				text.setText(new Save().Search(quaryField.getText(),caps.isSelected()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

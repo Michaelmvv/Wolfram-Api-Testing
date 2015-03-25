@@ -1,4 +1,5 @@
 package starter;
+
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.lang.reflect.InvocationTargetException;
@@ -20,24 +21,26 @@ public class Start {
 					"Super Kool App");
 			try {
 				Class util = Class.forName("com.apple.eawt.Application");
-				Method getApplication = util.getMethod("getApplication", new Class[0]);
-			    Object application = getApplication.invoke(util);
-			    Class params[] = new Class[1];
-			    params[0] = Image.class;
-			    Method setDockIconImage = util.getMethod("setDockIconImage", params);
-			    URL url = Start.class.getClassLoader().getResource("Light.png");
-			    Image image = Toolkit.getDefaultToolkit().getImage(url);
-			    setDockIconImage.invoke(application, image);
+				Method getApplication = util.getMethod("getApplication",
+						new Class[0]);
+				Object application = getApplication.invoke(util);
+				Class params[] = new Class[1];
+				params[0] = Image.class;
+				Method setDockIconImage = util.getMethod("setDockIconImage",
+						params);
+				URL url = Start.class.getClassLoader().getResource("Light.png");
+				Image image = Toolkit.getDefaultToolkit().getImage(url);
+				setDockIconImage.invoke(application, image);
 			} catch (ClassNotFoundException e) {
-			    // log exception
+				e.printStackTrace();
 			} catch (NoSuchMethodException e) {
-			    // log exception
+				e.printStackTrace();
 			} catch (InvocationTargetException e) {
-			    // log exception
+				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-			    // log exception
+				e.printStackTrace();
 			}
-	   
+
 		}
 		try {
 			UIManager.setLookAndFeel(UIManager

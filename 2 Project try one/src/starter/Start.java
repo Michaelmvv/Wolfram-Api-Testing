@@ -12,14 +12,15 @@ import gui.MeGUI;
 public class Start {
 	public static boolean LogResult = false;
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) {
 		if (System.getProperty("os.name").toLowerCase().contains("mac")) {
 			System.setProperty(
 					"com.apple.mrj.application.apple.menu.about.name",
 					"Super Kool App");
 			try {
-			    Class util = Class.forName("com.apple.eawt.Application");
-			    Method getApplication = util.getMethod("getApplication", new Class[0]);
+				Class util = Class.forName("com.apple.eawt.Application");
+				Method getApplication = util.getMethod("getApplication", new Class[0]);
 			    Object application = getApplication.invoke(util);
 			    Class params[] = new Class[1];
 			    params[0] = Image.class;

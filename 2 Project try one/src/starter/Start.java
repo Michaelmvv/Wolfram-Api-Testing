@@ -18,7 +18,7 @@ public class Start {
 		if (System.getProperty("os.name").toLowerCase().contains("mac")) {
 			System.setProperty(
 					"com.apple.mrj.application.apple.menu.about.name",
-					"Super Kool App");
+					"Michaels Wolfram App Thing");
 			try {
 				Class util = Class.forName("com.apple.eawt.Application");
 				Method getApplication = util.getMethod("getApplication",
@@ -28,7 +28,7 @@ public class Start {
 				params[0] = Image.class;
 				Method setDockIconImage = util.getMethod("setDockIconImage",
 						params);
-				URL url = Start.class.getClassLoader().getResource("Light.png");
+				URL url = Start.class.getClassLoader().getResource("img/Light.png");
 				Image image = Toolkit.getDefaultToolkit().getImage(url);
 				setDockIconImage.invoke(application, image);
 			} catch (ClassNotFoundException e) {

@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.net.URISyntaxException;
+
+import starter.Start;
 
 public class Save {
 
@@ -37,6 +40,27 @@ public class Save {
 			Elements();
 			return "Loading All dem Elements";
 		}
+		
+		if (input.equalsIgnoreCase("Why Did Michael Make this?")
+				|| input.equalsIgnoreCase("Why Did Michael Make this")) {
+			
+			try {
+				StringBuilder builder = new StringBuilder();
+				BufferedReader reader = new BufferedReader(new FileReader(new File(Start.class.getClassLoader().getResource("Texts/why.txt").toURI())));
+				LineNumberReader lnr = new LineNumberReader(new FileReader(new File(Start.class.getClassLoader().getResource("Texts/why.txt").toURI())));
+				lnr.skip(Long.MAX_VALUE);
+				for (int i = 0; i < lnr.getLineNumber()+1; i++) {
+					builder.append(reader.readLine() + "\n");
+				}
+				reader.close();
+				lnr.close();
+
+				return builder.toString();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			return "IDK WHY... DONT ASK ME";
+		}
 		String FixedInput;
 		if (caseSenc) {
 			FixedInput = String.format("%040x",
@@ -57,7 +81,7 @@ public class Save {
 
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			LineNumberReader lnr = new LineNumberReader(new FileReader(file));
-			lnr.skip(Long.MAX_VALUE);
+			System.out.println("Skiping: " + lnr.skip(Long.MAX_VALUE));
 			System.out.println(lnr.getLineNumber() + 1);
 
 			for (int i = 0; i < lnr.getLineNumber(); i++) {

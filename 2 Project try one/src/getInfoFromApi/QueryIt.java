@@ -33,7 +33,6 @@ public class QueryIt {
 							}
 						}
 					}
-
 				}
 			}
 			String s = builder.toString();

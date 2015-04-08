@@ -21,12 +21,15 @@ public class Start {
 					"Michaels Caching Wolfram App");
 			try {
 				Class util = Class.forName("com.apple.eawt.Application");
-				Method getApplication = util.getMethod("getApplication", new Class[0]);
+				Method getApplication = util.getMethod("getApplication",
+						new Class[0]);
 				Object application = getApplication.invoke(util);
 				Class params[] = new Class[1];
 				params[0] = Image.class;
-				Method setDockIconImage = util.getMethod("setDockIconImage",params);
-				URL url = Start.class.getClassLoader().getResource("img/Light.png");
+				Method setDockIconImage = util.getMethod("setDockIconImage",
+						params);
+				URL url = Start.class.getClassLoader().getResource(
+						"img/Light.png");
 				Image image = Toolkit.getDefaultToolkit().getImage(url);
 				setDockIconImage.invoke(application, image);
 			} catch (ClassNotFoundException e) {
@@ -49,4 +52,5 @@ public class Start {
 
 		new MeGUI().makeGui();
 	}
+
 }

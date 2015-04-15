@@ -1,5 +1,7 @@
 package gui;
 
+import help.Help;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -33,6 +35,8 @@ public class MeGUI implements ActionListener, KeyListener {
 	JScrollPane ScrollText = new JScrollPane(text);
 
 	JCheckBox caps = new JCheckBox("Case Sensitive");
+
+	JButton help = new JButton();
 
 	JTabbedPane tabbedPane = new JTabbedPane();
 	JPanel settingsPanel = new JPanel();
@@ -81,10 +85,13 @@ public class MeGUI implements ActionListener, KeyListener {
 		settingsPanel.add(goToColorFrame);
 		settingsPanel.add(delfiles);
 		delfiles.addActionListener(this);
-
+		panel.add(help);
+		help.addActionListener(this);
+help.setText("Help");
 		panel.add(quaryField);
 		panel.add(SerchButton);
 		panel.add(caps);
+
 		SerchButton.addActionListener(this);
 		newApiKey.addActionListener(this);
 
@@ -150,6 +157,9 @@ public class MeGUI implements ActionListener, KeyListener {
 				new Save().DelFiles();
 
 			}
+			if (buttonPressed == help) {
+				new Help();
+			}
 		}
 
 	}
@@ -161,8 +171,7 @@ public class MeGUI implements ActionListener, KeyListener {
 				|| arg0.getKeyCode() == KeyEvent.VK_TAB) {
 			tabbedPane.setSelectedIndex(1);
 			try {
-				text.setText(new Save().Search(quaryField.getText(),
-						caps.isSelected()));
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

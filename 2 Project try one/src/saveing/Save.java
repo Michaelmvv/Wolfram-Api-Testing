@@ -1,6 +1,7 @@
 package saveing;
 
 import getInfoFromApi.QueryIt;
+import help.Help;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,16 +41,21 @@ public class Save {
 			Elements();
 			return "Loading All dem Elements";
 		}
-		
+
 		if (input.equalsIgnoreCase("Why Did Michael Make this?")
-				|| input.equalsIgnoreCase("Why Did Michael Make this")) {
-			
+				|| input.equalsIgnoreCase("Why Did Michael Make this")
+				|| input.equalsIgnoreCase("Why")) {
+
 			try {
 				StringBuilder builder = new StringBuilder();
-				BufferedReader reader = new BufferedReader(new FileReader(new File(Start.class.getClassLoader().getResource("Texts/why.txt").toURI())));
-				LineNumberReader lnr = new LineNumberReader(new FileReader(new File(Start.class.getClassLoader().getResource("Texts/why.txt").toURI())));
+				BufferedReader reader = new BufferedReader(new FileReader(
+						new File(Start.class.getClassLoader()
+								.getResource("Texts/why.txt").toURI())));
+				LineNumberReader lnr = new LineNumberReader(new FileReader(
+						new File(Start.class.getClassLoader()
+								.getResource("Texts/why.txt").toURI())));
 				lnr.skip(Long.MAX_VALUE);
-				for (int i = 0; i < lnr.getLineNumber()+1; i++) {
+				for (int i = 0; i < lnr.getLineNumber() + 1; i++) {
 					builder.append(reader.readLine() + "\n");
 				}
 				reader.close();
@@ -60,6 +66,10 @@ public class Save {
 				e.printStackTrace();
 			}
 			return "IDK WHY... DONT ASK ME";
+		}
+		if (input.equalsIgnoreCase("Help")) {
+			new Help();
+			return "Opening Help.....";
 		}
 		String FixedInput;
 		if (caseSenc) {

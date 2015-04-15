@@ -31,7 +31,7 @@ public class MeGUI implements ActionListener, KeyListener {
 	JPanel panel = new JPanel();
 	JTextField quaryField = new JTextField("Pi");
 	JButton SerchButton = new JButton("Go");
-	JTextPane text = new JTextPane();
+	public static JTextPane text = new JTextPane();
 	JScrollPane ScrollText = new JScrollPane(text);
 
 	JCheckBox caps = new JCheckBox("Case Sensitive");
@@ -87,7 +87,8 @@ public class MeGUI implements ActionListener, KeyListener {
 		delfiles.addActionListener(this);
 		panel.add(help);
 		help.addActionListener(this);
-help.setText("Help");
+		help.setText("Help");
+		help.setPreferredSize(new Dimension(100, 40));
 		panel.add(quaryField);
 		panel.add(SerchButton);
 		panel.add(caps);
@@ -150,6 +151,7 @@ help.setText("Help");
 				delfiles.setBackground(background);
 				caps.setBackground(background);
 				ScrollText.setBackground(background);
+				help.setBackground(background);
 				frame.pack();
 
 			}
@@ -159,6 +161,7 @@ help.setText("Help");
 			}
 			if (buttonPressed == help) {
 				new Help();
+				tabbedPane.setSelectedIndex(1);
 			}
 		}
 
@@ -171,7 +174,8 @@ help.setText("Help");
 				|| arg0.getKeyCode() == KeyEvent.VK_TAB) {
 			tabbedPane.setSelectedIndex(1);
 			try {
-
+				text.setText(new Save().Search(quaryField.getText(),
+						caps.isSelected()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

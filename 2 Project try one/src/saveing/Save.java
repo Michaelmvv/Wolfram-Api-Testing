@@ -17,6 +17,10 @@ import starter.Start;
 public class Save {
 
 	String saveFolder = "WolframApi/save/";
+	
+	public Save() {
+		System.out.println("Save System starting!");
+	}
 
 	public void DelFiles() {
 		System.out.println("Clearing files");

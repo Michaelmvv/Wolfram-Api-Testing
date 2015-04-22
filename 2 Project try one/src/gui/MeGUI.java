@@ -53,6 +53,11 @@ public class MeGUI implements ActionListener, KeyListener {
 	JButton goToColorFrame = new JButton("Open color choser");
 	JPanel colorPanel = new JPanel();
 	JButton CDone = new JButton("Done");
+	Save saver = new Save();
+
+	public MeGUI() {
+		makeGui();
+	}
 
 	public void makeGui() {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -117,7 +122,7 @@ public class MeGUI implements ActionListener, KeyListener {
 			if (buttonPressed == SerchButton) {
 				tabbedPane.setSelectedIndex(1);
 				try {
-					text.setText(new Save().Search(quaryField.getText(),
+					text.setText(saver.Search(quaryField.getText(),
 							caps.isSelected()));
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -174,7 +179,7 @@ public class MeGUI implements ActionListener, KeyListener {
 				|| arg0.getKeyCode() == KeyEvent.VK_TAB) {
 			tabbedPane.setSelectedIndex(1);
 			try {
-				text.setText(new Save().Search(quaryField.getText(),
+				text.setText(saver.Search(quaryField.getText(),
 						caps.isSelected()));
 			} catch (Exception e) {
 				e.printStackTrace();

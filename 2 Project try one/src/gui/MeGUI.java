@@ -4,6 +4,7 @@ import help.Help;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -29,7 +31,7 @@ import apiKey.KeyFile;
 public class MeGUI implements ActionListener, KeyListener {
 	JFrame frame = new JFrame("Michaels Wolframalfa Project");
 	JPanel panel = new JPanel();
-	JTextField quaryField = new JTextField("Pi");
+	JTextField quaryField = new JTextField("Type your quarry here!");
 	JButton SerchButton = new JButton("Go");
 	public static JTextPane text = new JTextPane();
 	JScrollPane ScrollText = new JScrollPane(text);
@@ -40,20 +42,27 @@ public class MeGUI implements ActionListener, KeyListener {
 
 	JTabbedPane tabbedPane = new JTabbedPane();
 	JPanel settingsPanel = new JPanel();
-	JButton newApiKey = new JButton("New Api Key");
+	JButton newApiKey = new JButton("Reset api key");
 
 	Color background;
 	Color buttonColor;
 
-	JButton delfiles = new JButton("Clear Files");
+	JButton delfiles = new JButton("Clear Application Files");
 
 	// color choosing obj.
-	JFrame colorFrame = new JFrame("Color Choser");
+	JFrame colorFrame = new JFrame("Change background color");
 	JColorChooser cc = new JColorChooser();
 	JButton goToColorFrame = new JButton("Open color choser");
 	JPanel colorPanel = new JPanel();
 	JButton CDone = new JButton("Done");
 	Save saver = new Save();
+	
+	
+	
+	//loading screen
+	JFrame loading = new JFrame("Loading");
+	JPanel loadingPanel = new JPanel();
+	JLabel loadingtxt = new JLabel("LOADING......");
 
 	public MeGUI() {
 		makeGui();
@@ -81,12 +90,8 @@ public class MeGUI implements ActionListener, KeyListener {
 		tabbedPane.setTitleAt(2, "Settings");
 
 		settingsPanel.setLayout(new GridLayout(5, 1, 10, 10));
-		JLabel apikey = new JLabel("Api Key:");
-		apikey.setPreferredSize(new Dimension(100, 10));
-		settingsPanel.add(apikey);
 		newApiKey.setPreferredSize(new Dimension(100, 50));
 		settingsPanel.add(newApiKey);
-		settingsPanel.add(new JLabel("Background color:"));
 		settingsPanel.add(goToColorFrame);
 		settingsPanel.add(delfiles);
 		delfiles.addActionListener(this);
@@ -111,8 +116,33 @@ public class MeGUI implements ActionListener, KeyListener {
 		colorFrame.pack();
 
 		quaryField.addKeyListener(this);
+		tabbedPane.setSelectedIndex(0);
 		frame.setVisible(true);
+		
+		//loading
+		loading.add(loadingPanel);
+		loadingPanel.add(loadingtxt);
+		loadingtxt.setFont(new Font(loadingtxt.getFont().getName(), Font.PLAIN, 100));
+		loading.pack();
+		loading.setVisible(false);
+		loading.setAlwaysOnTop(true);
+		
+		
 
+	}
+
+	public void go() {
+		loading.setVisible(true);
+		tabbedPane.setSelectedIndex(1);
+		frame.pack();
+		try {
+			text.setText(saver.Search(quaryField.getText(), caps.isSelected()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		loading.setVisible(false);
+		frame.pack();
+		
 	}
 
 	@Override
@@ -120,14 +150,7 @@ public class MeGUI implements ActionListener, KeyListener {
 		if (arg0.getSource() instanceof JButton) {
 			JButton buttonPressed = (JButton) arg0.getSource();
 			if (buttonPressed == SerchButton) {
-				tabbedPane.setSelectedIndex(1);
-				try {
-					text.setText(saver.Search(quaryField.getText(),
-							caps.isSelected()));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				frame.pack();
+				go();
 			}
 			if (buttonPressed == newApiKey) {
 				try {
@@ -160,8 +183,11 @@ public class MeGUI implements ActionListener, KeyListener {
 				frame.pack();
 
 			}
-			if (buttonPressed == delfiles) {
-				new Save().DelFiles();
+			if (buttonPressed.equals(delfiles)) {
+				if (JOptionPane
+						.showConfirmDialog(null, "Get rid of the files?") == JOptionPane.YES_OPTION) {
+					saver.DelFiles();
+				}
 
 			}
 			if (buttonPressed == help) {
@@ -174,17 +200,9 @@ public class MeGUI implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-
 		if (arg0.getKeyCode() == KeyEvent.VK_ENTER
 				|| arg0.getKeyCode() == KeyEvent.VK_TAB) {
-			tabbedPane.setSelectedIndex(1);
-			try {
-				text.setText(saver.Search(quaryField.getText(),
-						caps.isSelected()));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			frame.pack();
+			go();
 
 		}
 

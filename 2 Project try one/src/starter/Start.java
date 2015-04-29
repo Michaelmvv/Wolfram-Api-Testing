@@ -50,7 +50,7 @@ public class Start {
 			e.printStackTrace();
 		}
 
-		new MeGUI().makeGui();
+		new MeGUI();
 	}
 
 }

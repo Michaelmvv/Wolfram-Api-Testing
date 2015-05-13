@@ -4,7 +4,6 @@ import help.Help;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,7 +27,8 @@ import saveing.Save;
 import apiKey.KeyFile;
 
 public class MeGUI implements ActionListener, KeyListener {
-	JFrame frame = new JFrame("Michaels Wolframalfa Project");
+	String name = "Michaels Wolframalfa Project";
+	JFrame frame = new JFrame(name);
 	JPanel panel = new JPanel();
 	JTextField quaryField = new JTextField("Type your quarry here!");
 	JButton SerchButton = new JButton("Go");
@@ -56,13 +55,11 @@ public class MeGUI implements ActionListener, KeyListener {
 	JPanel colorPanel = new JPanel();
 	JButton CDone = new JButton("Done");
 	Save saver = new Save();
-	
-	
-	
-	//loading screen
+
+	// loading screen
 	JFrame loading = new JFrame("Loading");
-	JPanel loadingPanel = new JPanel();
-	JLabel loadingtxt = new JLabel("LOADING......");
+//	JPanel loadingPanel = new JPanel();
+//	JLabel loadingtxt = new JLabel("LOADING......");
 
 	public MeGUI() {
 		makeGui();
@@ -118,20 +115,21 @@ public class MeGUI implements ActionListener, KeyListener {
 		quaryField.addKeyListener(this);
 		tabbedPane.setSelectedIndex(0);
 		frame.setVisible(true);
-		
-		//loading
-		loading.add(loadingPanel);
-		loadingPanel.add(loadingtxt);
-		loadingtxt.setFont(new Font(loadingtxt.getFont().getName(), Font.PLAIN, 100));
+
+		// loading
+//		loading.add(loadingPanel);
+//		loadingPanel.add(loadingtxt);
+//		loadingtxt.setFont(new Font(loadingtxt.getFont().getName(), Font.PLAIN,
+//				100));
 		loading.pack();
 		loading.setVisible(false);
 		loading.setAlwaysOnTop(true);
-		
-		
 
 	}
 
 	public void go() {
+		loading.setSize(frame.getSize());
+		loading.setLocationRelativeTo(frame);
 		loading.setVisible(true);
 		tabbedPane.setSelectedIndex(1);
 		frame.pack();
@@ -141,8 +139,9 @@ public class MeGUI implements ActionListener, KeyListener {
 			e.printStackTrace();
 		}
 		loading.setVisible(false);
+
 		frame.pack();
-		
+
 	}
 
 	@Override
@@ -153,10 +152,16 @@ public class MeGUI implements ActionListener, KeyListener {
 				go();
 			}
 			if (buttonPressed == newApiKey) {
-				try {
-					new KeyFile().ResetAPI();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+				if (JOptionPane
+						.showConfirmDialog(
+								frame,
+								"Bad Api keys will render the application unusable!!! You Have been warned. Continure?") == JOptionPane.YES_OPTION) {
+					try {
+
+						new KeyFile().ResetAPI();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			if (buttonPressed == goToColorFrame) {

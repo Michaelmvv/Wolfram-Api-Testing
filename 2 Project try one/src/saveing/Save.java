@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
 
-import starter.Start;
+import starter.Michaels_Caching_Wolfram_app;
 
 public class Save {
 
@@ -53,10 +53,10 @@ public class Save {
 			try {
 				StringBuilder builder = new StringBuilder();
 				BufferedReader reader = new BufferedReader(new FileReader(
-						new File(Start.class.getClassLoader()
+						new File(Michaels_Caching_Wolfram_app.class.getClassLoader()
 								.getResource("Texts/why.txt").toURI())));
 				LineNumberReader lnr = new LineNumberReader(new FileReader(
-						new File(Start.class.getClassLoader()
+						new File(Michaels_Caching_Wolfram_app.class.getClassLoader()
 								.getResource("Texts/why.txt").toURI())));
 				lnr.skip(Long.MAX_VALUE);
 				for (int i = 0; i < lnr.getLineNumber() + 1; i++) {

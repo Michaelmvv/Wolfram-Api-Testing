@@ -2,7 +2,7 @@ package getInfoFromApi;
 
 import java.io.FileNotFoundException;
 
-import starter.Start;
+import starter.Michaels_Caching_Wolfram_app;
 import apiKey.KeyFile;
 
 import com.wolfram.alpha.WAEngine;
@@ -56,7 +56,7 @@ public class WolfApi {
 				System.out
 						.println("Query was not understood; no results available.");
 			} else {
-				if (Start.LogResult) {
+				if (Michaels_Caching_Wolfram_app.LogResult) {
 					System.out.println("Successful query. Pods follow:\n");
 					for (WAPod pod : queryResult.getPods()) {
 						if (!pod.isError()) {

@@ -12,15 +12,15 @@ import javax.swing.UIManager;
 
 import gui.MeGUI;
 
-public class Start {
+public class Michaels_Caching_Wolfram_app {
 	public static boolean LogResult = false;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) {
 		if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-			System.setProperty(
+			System.out.println(System.setProperty(
 					"com.apple.mrj.application.apple.menu.about.name",
-					"Michaels Caching Wolfram App");
+					"Michaels Caching Wolfram App"));
 			try {
 				Class util = Class.forName("com.apple.eawt.Application");
 				Method getApplication = util.getMethod("getApplication",
@@ -30,7 +30,7 @@ public class Start {
 				params[0] = Image.class;
 				Method setDockIconImage = util.getMethod("setDockIconImage",
 						params);
-				URL url = Start.class.getClassLoader().getResource(
+				URL url = Michaels_Caching_Wolfram_app.class.getClassLoader().getResource(
 						"img/Light.png");
 				Image image = Toolkit.getDefaultToolkit().getImage(url);
 				setDockIconImage.invoke(application, image);
@@ -52,7 +52,7 @@ public class Start {
 			e.printStackTrace();
 		}
 		try {
-			File location = new File(Start.class.getProtectionDomain()
+			File location = new File(Michaels_Caching_Wolfram_app.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath());
 			if (location.getParentFile().list().length > 1) {
 				String[] options = { "Yes It's Fine",
@@ -61,7 +61,7 @@ public class Start {
 						.showOptionDialog(
 								null,
 								"I've detected that you may "
-										+ "not have installed this in the right location.The exe or jar file should "
+										+ "not have installed this in the right location. The jar file should "
 										+ "be placed in it's own folder with nothing else in it. Are you 100% sure "
 										+ "that's what you've done?",
 								"Warning", JOptionPane.DEFAULT_OPTION,

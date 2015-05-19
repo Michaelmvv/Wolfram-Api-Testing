@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import starter.Start;
+import starter.Michaels_Caching_Wolfram_app;
 
 public class Help implements WindowListener {
 	JFrame frame = new JFrame("Help");
@@ -29,11 +29,11 @@ public class Help implements WindowListener {
 		frame.add(panel);
 		frame.addWindowListener(this);
 		try {
-			BufferedImage inputimg = ImageIO.read(new File(Start.class
+			BufferedImage inputimg = ImageIO.read(new File(Michaels_Caching_Wolfram_app.class
 					.getClassLoader().getResource("img/input.png").toURI()));
-			BufferedImage outputimg = ImageIO.read(new File(Start.class
+			BufferedImage outputimg = ImageIO.read(new File(Michaels_Caching_Wolfram_app.class
 					.getClassLoader().getResource("img/output.png").toURI()));
-			BufferedImage settingsimg = ImageIO.read(new File(Start.class
+			BufferedImage settingsimg = ImageIO.read(new File(Michaels_Caching_Wolfram_app.class
 					.getClassLoader().getResource("img/settings.png").toURI()));
 			JLabel input = new JLabel(new ImageIcon(inputimg));
 			JLabel output = new JLabel(new ImageIcon(outputimg));

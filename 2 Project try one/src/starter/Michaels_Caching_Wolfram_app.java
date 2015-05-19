@@ -45,6 +45,7 @@ public class Michaels_Caching_Wolfram_app {
 			}
 
 		}
+		
 		try {
 			UIManager.setLookAndFeel(UIManager
 					.getCrossPlatformLookAndFeelClassName());

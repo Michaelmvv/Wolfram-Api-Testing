@@ -30,8 +30,8 @@ public class Michaels_Caching_Wolfram_app {
 				params[0] = Image.class;
 				Method setDockIconImage = util.getMethod("setDockIconImage",
 						params);
-				URL url = Michaels_Caching_Wolfram_app.class.getClassLoader().getResource(
-						"img/Light.png");
+				URL url = Michaels_Caching_Wolfram_app.class.getClassLoader()
+						.getResource("img/Light.png");
 				Image image = Toolkit.getDefaultToolkit().getImage(url);
 				setDockIconImage.invoke(application, image);
 			} catch (ClassNotFoundException e) {
@@ -45,7 +45,7 @@ public class Michaels_Caching_Wolfram_app {
 			}
 
 		}
-		
+
 		try {
 			UIManager.setLookAndFeel(UIManager
 					.getCrossPlatformLookAndFeelClassName());
@@ -53,8 +53,9 @@ public class Michaels_Caching_Wolfram_app {
 			e.printStackTrace();
 		}
 		try {
-			File location = new File(Michaels_Caching_Wolfram_app.class.getProtectionDomain()
-					.getCodeSource().getLocation().getPath());
+			File location = new File(Michaels_Caching_Wolfram_app.class
+					.getProtectionDomain().getCodeSource().getLocation()
+					.getPath());
 			if (location.getParentFile().list().length > 1) {
 				String[] options = { "Yes It's Fine",
 						"Whoops. I'll Change That Now" };

@@ -57,21 +57,23 @@ public class Michaels_Caching_Wolfram_app {
 					.getProtectionDomain().getCodeSource().getLocation()
 					.getPath());
 			if (location.getParentFile().list().length > 1) {
-
-				String[] options = { "Yes It's Fine",
-						"Whoops. I'll Change That Now" };
-				int ret = JOptionPane
-						.showOptionDialog(
-								null,
-								"I've detected that you may "
-										+ "not have installed this in the right location. The jar file should "
-										+ "be placed in it's own folder with nothing else in it. Are you 100% sure "
-										+ "that's what you've done?",
-								"Warning", JOptionPane.DEFAULT_OPTION,
-								JOptionPane.ERROR_MESSAGE, null, options,
-								options[0]);
-				if (ret != 0) {
-					System.exit(0);
+				File file = new File("WolframApi/");
+				if (!file.exists()) {
+					String[] options = { "Yes It's Fine",
+							"Whoops. I'll Change That Now" };
+					int ret = JOptionPane
+							.showOptionDialog(
+									null,
+									"I've detected that you may "
+											+ "not have installed this in the right location. The jar file should "
+											+ "be placed in it's own folder with nothing else in it. Are you 100% sure "
+											+ "that's what you've done?",
+									"Warning", JOptionPane.DEFAULT_OPTION,
+									JOptionPane.ERROR_MESSAGE, null, options,
+									options[0]);
+					if (ret != 0) {
+						System.exit(0);
+					}
 				}
 			}
 

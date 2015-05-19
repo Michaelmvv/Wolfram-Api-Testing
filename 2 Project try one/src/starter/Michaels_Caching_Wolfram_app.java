@@ -57,6 +57,7 @@ public class Michaels_Caching_Wolfram_app {
 					.getProtectionDomain().getCodeSource().getLocation()
 					.getPath());
 			if (location.getParentFile().list().length > 1) {
+
 				String[] options = { "Yes It's Fine",
 						"Whoops. I'll Change That Now" };
 				int ret = JOptionPane
@@ -73,6 +74,7 @@ public class Michaels_Caching_Wolfram_app {
 					System.exit(0);
 				}
 			}
+
 		} catch (Exception e) {
 			System.out.println("Happens when running from IDE\n");
 			System.out.println("Ignore Next Stack trace if in IDE\n");

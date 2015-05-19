@@ -5,3 +5,6 @@ Quarries wolframalpha and catches the result
 
 # Downloads
 [Click Here](https://github.com/Michaelmvv/Wolfram-Api-Testing/tree/master/Downloads)
+
+#bugs
+[Report bugs here](https://github.com/Michaelmvv/Wolfram-Api-Testing/issues)

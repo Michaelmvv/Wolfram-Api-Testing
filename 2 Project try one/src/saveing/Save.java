@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
 
+
 import starter.Michaels_Caching_Wolfram_app;
 
 public class Save {
@@ -70,6 +71,9 @@ public class Save {
 				e.printStackTrace();
 			}
 			return "IDK WHY... DONT ASK ME";
+		}
+		if (input.equalsIgnoreCase("Bug")) {
+			return "Report bugs here: https://github.com/Michaelmvv/Wolfram-Api-Testing/issues";
 		}
 		if (input.equalsIgnoreCase("Help")) {
 			new Help();

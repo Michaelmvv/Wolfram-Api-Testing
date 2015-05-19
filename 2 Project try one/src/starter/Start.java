@@ -1,11 +1,14 @@
 package starter;
 
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import gui.MeGUI;
@@ -47,6 +50,31 @@ public class Start {
 			UIManager.setLookAndFeel(UIManager
 					.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			File location = new File(Start.class.getProtectionDomain()
+					.getCodeSource().getLocation().getPath());
+			if (location.getParentFile().list().length > 1) {
+				String[] options = { "Yes It's Fine",
+						"Whoops. I'll Change That Now" };
+				int ret = JOptionPane
+						.showOptionDialog(
+								null,
+								"I've detected that you may "
+										+ "not have installed this in the right location.The exe or jar file should "
+										+ "be placed in it's own folder with nothing else in it. Are you 100% sure "
+										+ "that's what you've done?",
+								"Warning", JOptionPane.DEFAULT_OPTION,
+								JOptionPane.ERROR_MESSAGE, null, options,
+								options[0]);
+				if (ret != 0) {
+					System.exit(0);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Happens when running from IDE\n");
+			System.out.println("Ignore Next Stack trace if in IDE\n");
 			e.printStackTrace();
 		}
 

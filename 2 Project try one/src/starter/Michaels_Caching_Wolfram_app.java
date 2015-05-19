@@ -58,7 +58,7 @@ public class Michaels_Caching_Wolfram_app {
 					.getPath());
 			if (location.getParentFile().list().length > 1) {
 				File file = new File("WolframApi/");
-				if (!file.exists()) {
+				if (!file.exists()) {//to make shore it does not trigger due to its own files
 					String[] options = { "Yes It's Fine",
 							"Whoops. I'll Change That Now" };
 					int ret = JOptionPane
